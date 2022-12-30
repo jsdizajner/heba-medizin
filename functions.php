@@ -1,6 +1,9 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
+$HEBA_THEME_VERSION = \HEBA_CORE\HEBA_CORE::get_theme_info('Version');
+ray($HEBA_THEME_VERSION);
+
 /**
  * Load Composer
  */
@@ -23,9 +26,10 @@ $myUpdateChecker->setBranch('main');
 /**
  * Enqueue child scripts
  */
-if ( ! function_exists( 'medizin_child_enqueue_scripts' ) ) {
-	function medizin_child_enqueue_scripts() {
-		wp_enqueue_style( 'medizin-child-style', get_stylesheet_directory_uri() . '/style.css' );
+if ( ! function_exists( 'heba_enqueue_scripts' ) ) {
+	function heba_enqueue_scripts($HEBA_THEME_VERSION) {
+		wp_enqueue_style( 'heba-style', get_stylesheet_directory_uri() . '/style.css', '[]', $HEBA_THEME_VERSION);
 	}
 }
-add_action( 'wp_enqueue_scripts', 'medizin_child_enqueue_scripts', 15 );
+add_action( 'wp_enqueue_scripts', 'heba_enqueue_scripts', 15 );
+
