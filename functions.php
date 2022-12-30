@@ -2,7 +2,6 @@
 defined( 'ABSPATH' ) || exit;
 
 $HEBA_THEME_VERSION = \HEBA_CORE\HEBA_CORE::get_theme_info('Version');
-ray($HEBA_THEME_VERSION);
 
 /**
  * Load Composer
