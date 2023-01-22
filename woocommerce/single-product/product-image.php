@@ -20,7 +20,25 @@ defined( 'ABSPATH' ) || exit;
 
 global $post, $product;
 
+if ( \HEBA_CORE\HEBA_CORE::is_imported_product_image($product->get_id()) ) {
+	echo '<img width="480" height="600" src="'. HEBA_CORE\HEBA_CORE::get_product_thumbnail($product->get_id()) .'" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async" loading="lazy">';
+}
+else {
+	$attachment_ids = $product->get_gallery_image_ids();
 
-echo '<img src="' . \HEBA_CORE\HEBA_CORE::get_product_thumbnail($product->get_id()) . '" alt="Image ' . $product->get_name() . '" />';
+	if ( has_post_thumbnail() ) {
+		$thumbnail_id = (int) get_post_thumbnail_id();
+		array_unshift( $attachment_ids, $thumbnail_id );
+	}
 
-?>
+	$attachment_id = $attachment_ids[0];
+	$main_image_html = Medizin_Image::get_attachment_by_id(array(
+		'id' => $attachment_id,
+		'size' => '510x510',
+	));
+
+	echo '' . $main_image_html;
+}
+
+
+

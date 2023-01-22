@@ -45,20 +45,24 @@ if ( isset( $settings ) ) {
 				<?php woocommerce_template_loop_product_link_open(); ?>
 
 				<div class="product-main-image">
-					<img src="<?php echo \HEBA_CORE\HEBA_CORE::get_product_thumbnail($product_id); ?>" alt="Image <?php echo $product->get_name(); ?>" width="400" height="500" class="wp-post-image">
 					<?php
-//					$thumbnail_id = get_post_thumbnail_id();
-//					if ( ! $custom_thumbnail_size ) {
-//						Medizin_Woo::instance()->get_product_image( array(
-//							'id'          => $thumbnail_id,
-//							'extra_class' => 'wp-post-image',
-//						) );
-//					} else {
-//						Medizin_Image::the_attachment_by_id( array(
-//							'id'   => $thumbnail_id,
-//							'size' => $custom_thumbnail_size,
-//						) );
-//					}
+					if ( \HEBA_CORE\HEBA_CORE::is_imported_product_image($product->get_id()) ) {
+						echo '<img width="480" height="500" src="'. HEBA_CORE\HEBA_CORE::get_product_thumbnail($product->get_id()) .'" class="wp-post-image" alt="" decoding="async" loading="lazy">';
+					}
+					else {
+						$thumbnail_id = get_post_thumbnail_id();
+						if ( ! $custom_thumbnail_size ) {
+							Medizin_Woo::instance()->get_product_image( array(
+									'id'          => $thumbnail_id,
+									'extra_class' => 'wp-post-image',
+							) );
+						} else {
+							Medizin_Image::the_attachment_by_id( array(
+									'id'   => $thumbnail_id,
+									'size' => $custom_thumbnail_size,
+							) );
+						}
+					}
 					?>
 				</div>
 
