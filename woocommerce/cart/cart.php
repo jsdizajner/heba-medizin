@@ -49,19 +49,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 					<tr class="woocommerce-cart-form__cart-item <?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
 						<td class="product-thumbnail">
 							<?php
-							$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image( 'widget-product' ), $cart_item, $cart_item_key );
-
-							if ( \HEBA_CORE\HEBA_CORE::is_imported_product_image($product_id) ) {
-								echo '<img width="480" height="600" src="'. HEBA_CORE\HEBA_CORE::get_product_thumbnail($product_id) .'" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async" loading="lazy">';
-							}
-
-							elseif (! $product_permalink) {
-								echo '' . $thumbnail;
-							}
-
-							else {
-								printf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $thumbnail );
-							}
+							echo \HEBA_CORE\HEBA_CORE::get_product_thumbnail($product_id);
 							?>
 						</td>
 
