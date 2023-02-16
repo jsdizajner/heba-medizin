@@ -56,10 +56,12 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 					?>
 
 					<?php if ( empty( $product_permalink ) ) : ?>
-						<?php Medizin_Helper::e( $thumbnail . $product_name ); ?>
+						<?php Medizin_Helper::e(\HEBA_CORE\HEBA_CORE::get_product_thumbnail($product_id, ['width' => '150', 'height' => '150'])
+					 . $product_name ); ?>
 					<?php else : ?>
 						<a href="<?php echo esc_url( $product_permalink ); ?>">
-							<img src="<?php echo \HEBA_CORE\HEBA_CORE::get_product_thumbnail($product_id); ?>" class="img-sm border">
+							<?php Medizin_Helper::e(\HEBA_CORE\HEBA_CORE::get_product_thumbnail($product_id, ['width' => '150', 'height' => '150'])
+									. $product_name ); ?>
 						</a>
 					<?php endif; ?>
 					<?php echo wc_get_formatted_cart_item_data( $cart_item ); ?>
