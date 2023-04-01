@@ -18,7 +18,7 @@ defined('ABSPATH') || exit;
 	<div class="woocommerce-variation-description">{{{ data.variation.variation_description }}}</div>
 	<div class="woocommerce-variation-price">{{{ data.variation.price_html }}}</div>
 	<div class="woocommerce-variation-image">
-		<img src="{{{ data.variation.image.url }}}" alt="Obrázok produktu" class="img-fluid" width="250px" />
+		{{{ data.variation.variation_image' }}}
 	</div>
 	<div class="woocommerce-variation-stock">
 
@@ -31,13 +31,13 @@ defined('ABSPATH') || exit;
 	<# } else if ( data.variation.get_stock_status === "delayed_shipment" ) { #>
 		<span><i class="fas fa-dolly"></i> Na objednávku do 14 dní.</span> <br>
 
-	<# } else { #>	
+	<# } else { #>
 		<span class='nostock'><i class="fas fa-times"></i> Nie je na sklade </span>
 
 	<# } #>
 
 	</div>
-	
+
 	<div class="sku_wrapper meta-item">
 		<div class="woocommerce-variation-sku"><span id="sku-check">{{{ data.variation.sku || "-" }}}</span></div>
 		<div class="woocommerce-variation-availability">{{{ data.variation.availability_html }}}</div>

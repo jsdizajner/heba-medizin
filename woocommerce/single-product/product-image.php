@@ -22,6 +22,3 @@ global $post, $product;
 
 $product_id = $product->get_id();
 echo \HEBA_CORE\HEBA_CORE::get_product_thumbnail($product_id);
-
-
-
