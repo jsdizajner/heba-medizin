@@ -52,11 +52,8 @@
 					<div class="col-sm-12">
 						<div class="page-header-bottom-inner">
 							<div class="row">
-								<div class="col-xl-9 page-navigation-wrap">
+								<div class="col-xl-12 page-navigation-wrap">
 									<?php get_template_part('template-parts/navigation'); ?>
-								</div>
-								<div class="col-xl-3 col-sm-6">
-									<?php Medizin_Header::instance()->print_phone_number(); ?>
 								</div>
 							</div>
 						</div>
