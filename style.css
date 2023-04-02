@@ -3,11 +3,18 @@ Theme Name: Heba
 Theme URI: http://heba.sk
 Author: Július Sipos
 Author URI: http://heba.sk
-Version: 1.4.5
+Version: 1.4.5.001
 Template: medizin
 Text Domain:  heba
 */
 
+
+/*********************/
+/** MAIN NAVIGATION **/
+/*********************/
+.header-03 .menu--primary a {
+	font-size: 0.91em;
+}
 
 /*
 Archive / Taxonomy
@@ -38,3 +45,5 @@ ul.subcategories-list li a:hover{
 	background: #edf4fe;
 	color: #4f8aff;
 }
+
+
