@@ -92,5 +92,5 @@ function display_payment_link($order, $sent_to_admin, $plain_text, $email)
 add_action('wp_head', 'install_custom_favicon', 999);
 function install_custom_favicon()
 {
-	return '<link rel="shortcut icon" href="'. get_stylesheet_directory_uri() . '/assets/images/icon_favicon.png'>';
+	return '<link rel="shortcut icon" href="'. get_stylesheet_directory_uri() . '/assets/images/icon_favicon.png';
 }
