@@ -3,7 +3,7 @@ Theme Name: Heba
 Theme URI: http://heba.sk
 Author: Július Sipos
 Author URI: http://heba.sk
-Version: 1.4.5.005
+Version: 1.4.5.006
 Template: medizin
 Text Domain: heba
 */
@@ -46,4 +46,50 @@ ul.subcategories-list li a:hover{
 	color: #4f8aff;
 }
 
+/** Checkout Page **/
+@media(min-width: 992px){.page-sidebar{flex:0 0 25%;max-width:25%}.page-main-content{flex:0 0 75%;max-width:75%}}
 
+#shipping-in-form .package-name {
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 1.6;
+	color: #333;
+	margin: 0 0 18px;
+	padding-top: 46px;
+	border-top: 1px solid #eee;
+	margin-bottom: 32px;
+	display: block;
+}
+
+#shipping-in-form ul#shipping_method li {
+	margin: 15px 0px;
+	background: #ffffff;
+	height: 60px;
+	padding-left: 15px;
+	display: flex;
+	align-items: center;
+	color: #816969;
+	font-weight: 500;
+	border: 1px solid #e0e0e0;
+	border-radius: 5px;
+	position: relative;
+	cursor:pointer;
+}
+
+#shipping-in-form ul#shipping_method li.shipping-option-selected {
+	margin: 15px 0px;
+	background: #edf4fe;
+	height: 60px;
+	padding-left: 15px;
+	display: flex;
+	align-items: center;
+	color: #4f8aff;
+	font-weight: 500;
+	cursor:pointer;
+}
+
+#shipping-in-form ul#shipping_method li span.woocommerce-Price-amount.amount {
+	color: #4E97FD;
+	position: absolute;
+	right: 20px;
+}
