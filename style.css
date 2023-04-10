@@ -96,3 +96,7 @@ ul.subcategories-list li a:hover{
 	position: absolute;
 	right: 20px;
 }
+
+.elementor-page.page-has-no-sidebar .page-content > .container {
+	max-width: 1200px !important;
+}
