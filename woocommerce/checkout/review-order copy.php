@@ -2,7 +2,7 @@
 /**
  * Review order table
  *
- * This template can be overridden by copying it to unicamp-child/woocommerce/checkout/review-order.php.
+ * This template can be overridden by copying it to yourtheme/woocommerce/checkout/review-order.php.
  *
  * HOWEVER, on occasion WooCommerce will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -10,7 +10,7 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see     https://docs.woocommerce.com/document/template-structure/
+ * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
  * @version 5.2.0
  */
@@ -30,9 +30,6 @@ defined( 'ABSPATH' ) || exit;
 
 	foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 		$_product = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
-		$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
-		$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
-		$product_name      = apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key );
 
 		if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 			?>
@@ -40,20 +37,15 @@ defined( 'ABSPATH' ) || exit;
 				<td class="product-info">
 					<div class="product-wrapper">
 						<div class="product-thumbnail">
-							<?php if ( empty( $product_permalink ) ) : ?>
-								<?php Medizin_Helper::e(\HEBA_CORE\HEBA_CORE::get_product_thumbnail($product_id, ['width' => '150', 'height' => '150'])
-										. $product_name ); ?>
-							<?php else : ?>
-								<a href="<?php echo esc_url( $product_permalink ); ?>">
-									<?php Medizin_Helper::e(\HEBA_CORE\HEBA_CORE::get_product_thumbnail($product_id, ['width' => '150', 'height' => '150'])
-											. $product_name ); ?>
-								</a>
-							<?php endif; ?>
+							<?php
+							$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image( 'widget-product' ), $cart_item, $cart_item_key );
+							echo '' . $thumbnail;
+							?>
 						</div>
 
 						<div class="product-caption">
 							<div class="product-name">
-								<?php echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) ) . '&nbsp;'; ?>
+								<?php echo apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) . '&nbsp;'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $cart_item['quantity'] ) . '</strong>', $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								<?php echo wc_get_formatted_cart_item_data( $cart_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
@@ -86,44 +78,7 @@ defined( 'ABSPATH' ) || exit;
 		</tr>
 	<?php endforeach; ?>
 
-	<?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
-		<?php //wc_cart_totals_shipping_html(); ?>
-		<tr class="woocommerce-shipping-totals shipping">
-			<th><?php esc_html_e( 'Shipping', 'medizin' ); ?></th>
-			<td>
-				<?php do_action( 'woocommerce_review_order_before_shipping' ); ?>
-				<?php
-				/**
-				 * Custom html. Show selected shipping method.
-				 */
-				$packages = WC()->shipping()->get_packages();
-				foreach ( $packages as $i => $package ) {
-					$chosen_method = isset( WC()->session->chosen_shipping_methods[ $i ] ) ? WC()->session->chosen_shipping_methods[ $i ] : '';
-					$product_names = array();
-
-					if ( count( $packages ) > 1 ) {
-						foreach ( $package['contents'] as $item_id => $values ) {
-							$product_names[ $item_id ] = $values['data']->get_name() . ' &times;' . $values['quantity'];
-						}
-						$product_names = apply_filters( 'woocommerce_shipping_package_details_array', $product_names, $package );
-					}
-
-					// Available methods.
-					if ( ! empty( $package['rates'] ) ) {
-						foreach ( $package['rates'] as $method ) :
-							if ( $method->id === $chosen_method ) {
-								echo wc_cart_totals_shipping_method_label( $method );
-							}
-						endforeach;
-					}
-				}
-				?>
-
-				<?php do_action( 'woocommerce_review_order_after_shipping' ); ?>
-			</td>
-		</tr>
-	<?php endif; ?>
-
+	
 	<?php foreach ( WC()->cart->get_fees() as $fee ) : ?>
 		<tr class="fee">
 			<th><?php echo esc_html( $fee->name ); ?></th>
