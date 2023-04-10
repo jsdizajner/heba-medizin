@@ -40,53 +40,6 @@ if ($page_sidebar1 !== 'none') {
 
 					<?php
 					/**
-					 * Setup query to show the ‘services’ post type with ‘8’ posts.
-					 * Output the title with an excerpt.
-					 */
-					$args = array(
-						'post_type' => 'bannerad',
-						'post_status' => 'publish',
-						'posts_per_page' => 4
-					);
-
-					$loop = new WP_Query($args);
-					?>
-					<div class="splide advertisingbanner" id="splide">
-						<div class="splide__track">
-							<ul class="splide__list">
-								<?php while ($loop->have_posts()) : $loop->the_post(); ?>
-									<li class="splide__slide">
-										<a href="<?php echo get_field("ad_url") ?>">
-											<img class="banner" src="<?php echo get_field("banner_image") ?>" alt="Reklamný Slide" id="<?php
-											$bannerTagID = get_field('banner_tracking_id');
-											if (isset($bannerTagID)) {
-												echo get_field('banner_tracking_id');
-											} else {
-												echo "top-banner-" . get_the_ID();
-											};
-											?>" onclick="dataLayer.push({'event': 'Banner_Reklama'});">
-										</a>
-									</li>
-								<?php endwhile;
-								wp_reset_postdata(); ?>
-							</ul>
-						</div>
-						<div class="splide__progress">
-							<div class="splide__progress__bar">
-							</div>
-						</div>
-					</div>
-					<?php // END OF ADVERTISING SLIDER
-					?>
-
-					<div class="mobile-search">
-						<h3 class="text-center">Vyhľadávanie</h3>
-						<?php echo do_shortcode('[wcas-search-form]'); ?>
-					</div>
-
-
-					<?php
-					/**
 					 * woocommerce_archive_description hook.
 					 *
 					 * @hooked woocommerce_taxonomy_archive_description - 10
