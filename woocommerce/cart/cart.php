@@ -208,27 +208,6 @@ do_action( 'woocommerce_before_cart' ); ?>
 				<?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
 
 				<div class="cart-collaterals row">
-					<?php if ( WC()->cart->needs_shipping() ) : ?>
-						<div class="col-md-6 custom-calculate-shipping-block">
-							<h6 class="shipping-heading"><?php esc_html_e( 'Calculate shipping', 'medizin' ); ?></h6>
-							<?php if ( WC()->cart->show_shipping() ) : ?>
-
-								<?php do_action( 'woocommerce_cart_totals_before_shipping' ); ?>
-
-								<?php wc_cart_totals_shipping_html(); ?>
-
-								<?php do_action( 'woocommerce_cart_totals_after_shipping' ); ?>
-
-							<?php elseif ( 'yes' === get_option( 'woocommerce_enable_shipping_calc' ) ) : ?>
-
-								<div class="shipping">
-									<?php woocommerce_shipping_calculator(); ?>
-								</div>
-
-							<?php endif; ?>
-						</div>
-					<?php endif; ?>
-
 					<?php
 					$total_column_classes = 'col-md-push-6 col-md-6 cart-total-wrap';
 
