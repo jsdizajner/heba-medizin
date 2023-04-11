@@ -28,7 +28,6 @@
 			<link rel="pingback" href="<?php echo esc_url(get_bloginfo('pingback_url', 'display')); ?>">
 		<?php endif; ?>
 		<?php Medizin_THA::instance()->head_bottom(); ?>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
 		<?php wp_head(); ?>
 		<!-- Google tag (gtag.js) --> <script async
 											  src="https://www.googletagmanager.com/gtag/js?id=AW-625375761"></script> <script>
