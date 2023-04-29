@@ -77,8 +77,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php endif; ?>
 				</div>
 
-					
-				
+
+
 				<?php
 				/**
 				 * woocommerce_checkout_after_order_review hook.
