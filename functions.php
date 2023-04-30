@@ -95,3 +95,6 @@ function display_payment_link($order, $sent_to_admin, $plain_text, $email)
 		}
 	}
 }
+
+/** @HOTFIX WooCommerce Product Single Variation Picker */
+wp_deregister_script('medizin-woo-single');
