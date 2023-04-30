@@ -95,3 +95,23 @@ function display_payment_link($order, $sent_to_admin, $plain_text, $email)
 		}
 	}
 }
+
+
+
+/**
+ * @snippet       Sort Products By Stock Status - WooCommerce Shop
+ * @how-to        Get CustomizeWoo.com FREE
+ * @author        Rodolfo Melogli
+ * @compatible    WooCommerce 5
+ * @donate $9     https://businessbloomer.com/bloomer-armada/
+ * 
+ * @docs https://www.businessbloomer.com/woocommerce-show-in-stock-products-first-shop/
+ */
+ 
+ add_filter( 'woocommerce_get_catalog_ordering_args', 'bbloomer_first_sort_by_stock_amount', 9999 );
+ 
+ function bbloomer_first_sort_by_stock_amount( $args ) {
+	$args['orderby'] = 'meta_value';
+	$args['meta_key'] = '_stock_status';
+	return $args;
+ }
