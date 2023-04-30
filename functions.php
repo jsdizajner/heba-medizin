@@ -37,7 +37,6 @@ add_action( 'wp_enqueue_scripts', 'heba_enqueue_scripts', 15 );
  */
 
 add_filter('woocommerce_email_attachments', 'bbloomer_attach_pdf_to_emails', 10, 4);
-
 function bbloomer_attach_pdf_to_emails($attachments, $email_id, $order, $email)
 {
 	$email_ids = array('customer_completed_order');
@@ -48,12 +47,24 @@ function bbloomer_attach_pdf_to_emails($attachments, $email_id, $order, $email)
 	return $attachments;
 }
 
+
+/**
+ * @snippet Load ADC Title before WooCommerce Title
+ */
+add_filter( 'the_title', 'load_adc_title_first', 10, 2 );
+function load_adc_title_first( $title, $id = null ) {
+	$post = get_post($id);
+	if ($post->post_type == 'product' ) {
+		return \HEBA_CORE\HEBA_CORE::get_adc_product_name($id);
+	}
+	return $title;
+}
+
 /**
  * Create a payment Link
  */
 
 add_action('woocommerce_email_after_order_table', 'display_payment_link', 20, 4);
-
 function display_payment_link($order, $sent_to_admin, $plain_text, $email)
 {
 	if ($email->id == 'customer_invoice' || $email->id == 'new_order' || $email->id == 'customer_on_hold_order') {
