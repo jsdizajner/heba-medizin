@@ -54,7 +54,7 @@ function bbloomer_attach_pdf_to_emails($attachments, $email_id, $order, $email)
 add_filter( 'the_title', 'load_adc_title_first', 10, 2 );
 function load_adc_title_first( $title, $id = null ) {
 	$post = get_post($id);
-	if ($post->post_type == 'product' ) {
+	if ($post->post_type == 'product' and get_post_meta($id,'_importer_supplier', true) == 'Medart' ) {
 		return \HEBA_CORE\HEBA_CORE::get_adc_product_name($id);
 	}
 	return $title;
