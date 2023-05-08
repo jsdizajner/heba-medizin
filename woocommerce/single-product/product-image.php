@@ -20,5 +20,15 @@ defined( 'ABSPATH' ) || exit;
 
 global $post, $product;
 
-$product_id = $product->get_id();
-echo \HEBA_CORE\HEBA_CORE::get_product_thumbnail($product_id);
+
+
+$heba_image = new \HEBA_IMAGE\HEBA_IMAGE($product->get_id());
+if ($heba_image->is_heba_image()) {
+	get_template_part( 'template-parts/single-product','heba-image' );
+} else {
+	get_template_part( 'template-parts/single-product','medizin-image' );
+}
+
+
+
+
