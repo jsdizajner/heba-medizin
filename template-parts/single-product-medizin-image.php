@@ -1,7 +1,24 @@
 <?php
-defined( 'ABSPATH' ) || exit;
-global $post, $product;
+/**
+ * Single Product Image
+ *
+ * This template can be overridden by copying it to yourtheme/woocommerce/single-product/product-image.php.
+ *
+ * HOWEVER, on occasion WooCommerce will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ *
+ * @see     https://docs.woocommerce.com/document/template-structure/
+ * @author  WooThemes
+ * @package WooCommerce/Templates
+ * @version 3.5.1
+ */
 
+defined( 'ABSPATH' ) || exit;
+
+global $post, $product;
 
 $is_quick_view = apply_filters( 'medizin_content_quick_view', false );
 
@@ -29,8 +46,8 @@ if ( has_post_thumbnail() ) {
 	$thumbnail_id = (int) get_post_thumbnail_id();
 	array_unshift( $attachment_ids, $thumbnail_id );
 }
-?>
 
+?>
 <?php if ( ! empty( $attachment_ids ) ) {
 	$number_attachments = count( $attachment_ids );
 	?>
