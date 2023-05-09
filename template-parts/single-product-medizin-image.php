@@ -134,22 +134,22 @@ if ( has_post_thumbnail() ) {
 				</div>
 
 				<?php if ( $number_attachments > 1 ) { ?>
-					<div class="tm-swiper medizin-thumbs-swiper"
-						 data-lg-items="4"
-						 data-lg-gutter="10"
-						 data-speed="1000"
-						 data-effect="slide"
-						 data-slide-to-clicked-slide="1"
-						 data-freemode="1"
-					>
-						<div class="swiper-inner">
-							<div class="swiper-container">
-								<div class="swiper-wrapper">
-									<?php echo '' . $thumbs_slider_slides_html; ?>
-								</div>
-							</div>
-						</div>
-					</div>
+<!--					<div class="tm-swiper medizin-thumbs-swiper"-->
+<!--						 data-lg-items="4"-->
+<!--						 data-lg-gutter="10"-->
+<!--						 data-speed="1000"-->
+<!--						 data-effect="slide"-->
+<!--						 data-slide-to-clicked-slide="1"-->
+<!--						 data-freemode="1"-->
+<!--					>-->
+<!--						<div class="swiper-inner">-->
+<!--							<div class="swiper-container">-->
+<!--								<div class="swiper-wrapper">-->
+<!--									--><?php //echo '' . $thumbs_slider_slides_html; ?>
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
 				<?php } ?>
 			</div>
 		<?php } else { ?>
