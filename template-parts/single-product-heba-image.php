@@ -23,7 +23,7 @@ $attributes = [
 						<div class="swiper-inner">
 							<div class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-autoheight">
 								<div class="swiper-wrapper" style="height: 570px; transform: translate3d(0px, 0px, 0px);">
-									<div class="zoom swiper-slide product-main-image swiper-slide-visible swiper-slide-active" data-sub-html="<h4><?php $product->get_name(); ?></h4>" data-src="<?php echo $heba_image->get_current_image($attributes); ?>">
+									<div class="zoom swiper-slide product-main-image swiper-slide-visible swiper-slide-active" data-sub-html="<h4><?php $product->get_name(); ?></h4>" data-src="<?php echo $heba_image->get_current_image($attributes, 'src'); ?>">
 										<?php echo $heba_image->get_current_image($attributes); ?>
 									</div>
 								</div>
