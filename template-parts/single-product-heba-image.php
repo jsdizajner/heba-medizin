@@ -16,7 +16,6 @@ $attributes = [
 
 	<div class="tm-sticky-column">
 		<div class="woo-single-images">
-			<div class="entry-product-badges product-badges"><span class="new">New</span></div>
 			<div class="feature-style-slider medizin-light-gallery">
 				<div class="woo-single-gallery">
 					<div class="tm-swiper medizin-main-swiper" data-lg-items="1" data-lg-gutter="30" data-speed="1000" data-effect="slide" data-auto-height="1">
