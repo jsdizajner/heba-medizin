@@ -33,6 +33,8 @@
 											  src="https://www.googletagmanager.com/gtag/js?id=AW-625375761"></script> <script>
 			window.dataLayer = window.dataLayer || []; function
 			gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW625375761'); </script>
+		<meta name="google-site-verification" content="XvE3jUiyGiiCdw5onIMOlxWF_CC1wpiX-I-7mo81bAg" />
+		<?php do_action('heba_head_tag'); ?>
 	</head>
 
 <body <?php body_class(); ?> <?php Medizin::body_attributes(); ?>>
