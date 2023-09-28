@@ -40,6 +40,74 @@
 <body <?php body_class(); ?> <?php Medizin::body_attributes(); ?>>
 
 <?php wp_body_open(); ?>
+<nav class="mobile-navigation-bottom">
+    <ul class="mobile-navigation-bottom-nav-items">
+        <li class="mobile-navigation-bottom-nav-item" id="MobileMenuToggler">
+            <a href="#" class="mbm-link">
+                <i class="mbm-icon">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path id="CategoriesIcon" class="CategoriesIcon " d="M3.5 4.66675H24.5V7.00008H3.5V4.66675ZM3.5 12.8334H17.5V15.1667H3.5V12.8334ZM3.5 21.0001H24.5V23.3334H3.5V21.0001Z" fill="#3886C7"/>
+                    </svg>
+                </i>
+                <span><?php echo __('Categories', 'woocommerce'); ?></span>
+            </a>
+        </li>
+        <li class="mobile-navigation-bottom-nav-item" id="FocusSearchInput">
+            <a href="#mobileSearchFocus" class="mbm-link">
+                <i class="mbm-icon"><img src="<?php echo esc_url( get_stylesheet_directory_uri()); ?>/assets/images/mobil-hladat.svg" alt="Icon Categories" /></i>
+                <span><?php echo __('Search', 'woocommerce'); ?></span>
+            </a>
+        </li>
+        <li class="mobile-navigation-bottom-nav-item">
+            <a href="<?php echo wc_get_cart_url(); ?>" class="mbm-link">
+                <i class="mbm-icon"><img src="<?php echo esc_url( get_stylesheet_directory_uri()); ?>/assets/images/mobil-kosik.svg" alt="Icon Categories" /></i>
+                <span><?php echo __('Cart', 'woocommerce'); ?></span>
+            </a>
+        </li>
+        <li class="mobile-navigation-bottom-nav-item">
+            <a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>" class="mbm-link">
+                <i class="mbm-icon"><img src="<?php echo esc_url( get_stylesheet_directory_uri()); ?>/assets/images/mobil-ucet.svg" alt="Icon Categories" /></i>
+                <span><?php echo __('Profile', 'woocommerce'); ?></span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<div class="mobile-menu-overlay" id="MobileMenuOverlay">
+    <div class="mbo-top">
+        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/mbo-logo.svg" class="mobile-menu-overlay-logo"/>
+        <i class="mbo-icon" id="MBOCloseIcon"><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/mobil-krizik-cierny.svg" /></i>
+    </div>
+    <div class="mbo-menu">
+        <ul class="mbo-categories">
+            <?php
+            $categories = get_terms(['taxonomy' => 'product_cat','hide_empty' => false, 'parent' => 0]);
+            foreach ($categories as $category) {
+                echo '<li class="mbo-category">
+            <a href="' . get_term_link($category->term_id) . '" class="mbo-link">'. $category->name .'</a>
+            <i class="mbo-icon"><img src="'. get_stylesheet_directory_uri() .'/assets/images/mbo-chevron.svg" /></i>
+        </li>';
+            }
+            ?>
+        </ul>
+    </div>
+</div>
+<script>
+    document.getElementById("FocusSearchInput").addEventListener("click", () => {
+        document.getElementById("dgwt-wcas-search-input-1").focus();
+    });
+    var burgerMenu = document.getElementById('MobileMenuToggler');
+    var overlay = document.getElementById('MobileMenuOverlay');
+    var MBOCloseIcons = document.getElementById('MBOCloseIcon');
+    var MBMToggle = document.getElementById('CategoriesIcon');
+    MBOCloseIcons.addEventListener('click', function () {
+        overlay.classList.toggle("overlay");
+    });
+    burgerMenu.addEventListener('click',function(){
+        this.classList.toggle("close");
+        MBMToggle.classList.toggle("CategoriesClose");
+        overlay.classList.toggle("overlay");
+    });
+</script>
 
 <?php Medizin_Templates::pre_loader(); ?>
 

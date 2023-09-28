@@ -3,7 +3,7 @@ Theme Name: Heba
 Theme URI: http://heba.sk
 Author: Július Sipos
 Author URI: http://heba.sk
-Version: 1.6.4
+Version: 1.7.4
 Template: medizin
 Text Domain: medizin
 */
@@ -103,4 +103,147 @@ ul.subcategories-list li a:hover{
 
 .dgwt-wcas-no-submit .dgwt-wcas-sf-wrapp input[type=search].dgwt-wcas-search-input {
 	border-radius: 150px !important;
+}
+
+/**
+MOBILE NAVIGATION
+ */
+
+/*=============== NAV ===============*/
+
+.mobile-navigation-bottom {
+	display:none;
+}
+
+@media only screen and (max-width: 960px) {
+
+	.mobile-navigation-bottom {
+		z-index: 999999;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		background: #FFFFFF;
+		box-shadow: 0px -20px 30px 0px #15334814;
+		border-radius: 12px 12px 0px 0px;
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+		width: 100%;
+		justify-content: space-evenly;
+	}
+
+	.mobile-navigation-bottom-nav-items {
+		display: flex;
+		list-style: none;
+		flex-direction: row;
+		flex-grow: 1;
+		justify-content: space-evenly;
+		padding-inline-start: 0;
+		margin: 0 !important;
+	}
+
+	#MobileMenuToggler.close {
+		background-color: #3886C7;
+		color:white;
+	}
+
+	.mobile-navigation-bottom-nav-item {
+		display: flex;
+		width:25%;
+		justify-content: center;
+		margin: 0 !important;
+		padding-top: 25px;
+		padding-bottom: 25px;
+	}
+
+	ul.mobile-navigation-bottom-nav-items li.mobile-navigation-bottom-nav-item:first-child {
+		border-radius: 12px 0px 0px 0px;
+	}
+
+	ul.mobile-navigation-bottom-nav-items li.mobile-navigation-bottom-nav-item:last-child {
+		border-radius: 0px 12px 0px 0px;
+	}
+
+	.mbm-link {
+		display: flex;
+		color: #1E1E1E;
+		text-decoration: none;
+		flex-direction: column;
+		text-align:center;
+		align-items: center;
+	}
+
+	.mbm-link:active, .mbm-link:focus  {
+		color: white;
+	}
+
+	.mbm-icon {
+		width:28px;
+		height:28px;
+		margin:5px;
+	}
+	.CategoriesClose {
+		fill: white !important;
+	}
+
+}
+
+.mobile-menu-overlay {
+	width: 100%;
+	height: 100%;
+	position:fixed;
+	top: 0;
+	left: 0;
+	z-index:99999;
+	background-color: white;
+	display: flex;
+	overflow: scroll;
+	flex-direction: column;
+	visibility: hidden;
+}
+#MobileMenuOverlay.overlay {
+	visibility: visible !important;
+}
+
+.mbo-top {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 15px 18px;
+}
+
+.mobile-menu-overlay-logo {
+	width: 160px;
+}
+
+.mbo-menu {
+	width: 100%;
+}
+
+ul.mbo-categories {
+	list-style: none;
+	padding-inline: 0;
+	margin-block: 0;
+}
+
+li.mbo-category {
+	border-top: solid #EEEEEE 1px;
+	padding: 18px 37px;
+	display: flex;
+	justify-content: space-between;
+	align-items:center;
+
+}
+
+ul.mbo-categories li.mbo-category:last-child {
+	margin-bottom: 5em;
+	border-bottom: solid #EEEEEE 1px;
+}
+
+a.mbo-link {
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 24px;
+	color:#333333;
 }
