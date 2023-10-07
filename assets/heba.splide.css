@@ -1,0 +1,52 @@
+
+.splide__arrow {
+    -ms-flex-align: center;
+    align-items: center;
+    background: none;
+    border: 0;
+    border-radius: none;
+    cursor: pointer;
+    display: -ms-flexbox;
+    display: flex;
+    height: 2em;
+    -ms-flex-pack: center;
+    justify-content: center;
+    opacity: .7;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2em;
+    z-index: 1;
+}
+
+button.splide__arrow:hover {
+    color: #fff;
+    border: none;
+    background-color: transparent !important;
+}
+
+.splide__arrow svg {
+    fill: #3886C7;
+}
+
+.splide__list {
+    backface-visibility: hidden;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    margin: 0!important;
+    padding: 0!important;
+}
+
+.splide__slide {
+    backface-visibility: hidden;
+    box-sizing: border-box;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    list-style-type: none!important;
+    margin: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}

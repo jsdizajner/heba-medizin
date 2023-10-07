@@ -118,3 +118,32 @@ function display_payment_link($order, $sent_to_admin, $plain_text, $email)
 
  add_action('wp_enqueue_scripts', function () {wp_enqueue_script('wc-add-to-cart-variation');});
 
+
+add_action('heba_head_tag', function () {
+    echo '<link href="' . get_stylesheet_directory_uri() . '/assets/splide.min.css" rel="stylesheet">';
+    echo '<script src="' . get_stylesheet_directory_uri() . '/assets/splide.min.js"></script>';
+    echo '<link href="' . get_stylesheet_directory_uri() . '/assets/heba.splide.css" rel="stylesheet">';
+});
+
+use Carbon_Fields\Container;
+use Carbon_Fields\Field;
+
+Container::make( 'theme_options', __( 'Homepage Slider' ) )
+    ->set_page_menu_title( 'Slider' )
+    ->set_page_menu_position( 1 )
+    ->add_fields( array(
+        Field::make( 'complex', 'heba_crb_slider', __( 'Slider' ) )
+            ->set_header_template( '
+                    <% if (url) { %>
+                        URL: <%- url %>
+                    <% } %>
+                ' )
+            ->add_fields( array(
+                Field::make( 'text', 'url', __( 'URL' ) ),
+                Field::make( 'image', 'slider-image-desktop', __( 'Image' ) )
+                    ->set_value_type( 'url' ),
+                Field::make( 'image', 'slider-image-mobile', __( 'Image Mobile' ) )
+                    ->set_value_type( 'url' ),
+            ) ),
+
+    ) );
