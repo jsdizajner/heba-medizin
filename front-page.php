@@ -65,6 +65,8 @@ if (!empty($slides)) { ?>
     <script>
         const splide = new Splide('#slider1', {
             type   : 'loop',
+            autoplay: true,
+            interval: 5000,
         } );
         splide.mount();
 
@@ -76,6 +78,8 @@ if (!empty($slides)) { ?>
                     arrows: false,
                 },
             },
+            autoplay: true,
+            interval: 5000,
         } );
         splideM.mount();
     </script>
