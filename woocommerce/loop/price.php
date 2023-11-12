@@ -22,22 +22,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $product;
 ?>
 
-
 <?php if ( $product->get_price_html() ) : ?>
 
-
 	<?php if ( $product->is_on_sale() ) : ?>
-		
-		<?php
-			// Get price with tax included
-			$regular_tax_inc    = wc_get_price_including_tax( $product, [ 'price' => $product->get_regular_price() ] );
-			$sale_tax_inc       = wc_get_price_including_tax( $product, [ 'price' => $product->get_sale_price() ] );
-		?>
-		<span class="price"><?php echo wc_format_sale_price( $regular_tax_inc, $sale_tax_inc ); ?></span>
-
+		<span class="price"><?php echo $product->get_price_html(); //this will display the sale price ?></span>
 	<?php else : ?>
 		<span class="price"><?php echo wc_price( wc_get_price_including_tax( $product ) ); ?></span>
 	<?php endif; ?>
-
 
 <?php endif; ?>

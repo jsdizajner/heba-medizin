@@ -20,18 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $product;
-
 ?>
 
 <?php if ( $product->is_on_sale() ) : ?>
-    
-    <?php
-        // Get price with tax included
-        $regular_tax_inc    = wc_get_price_including_tax( $product, [ 'price' => $product->get_regular_price() ] );
-        $sale_tax_inc       = wc_get_price_including_tax( $product, [ 'price' => $product->get_sale_price() ] );
-    ?>
-    <p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>"><?php echo wc_format_sale_price( $regular_tax_inc, $sale_tax_inc ); ?></p>
-
+    <p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>"><?php echo $product->get_price_html(); //this will display the sale price ?></p>
 <?php else : ?>
     <p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>"><?php echo wc_price( wc_get_price_including_tax( $product ) ); ?></p>
 <?php endif; ?>
