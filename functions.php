@@ -61,17 +61,33 @@ function load_adc_title_first( $title, $id = null ) {
 }
 
 /**
+ * Maybe display payment link if payment method is online payment
+ * 
  * Create a payment Link
  */
 
 add_action('woocommerce_email_after_order_table', 'display_payment_link', 20, 4);
 function display_payment_link($order, $sent_to_admin, $plain_text, $email)
 {
-	if ($email->id == 'customer_invoice' || $email->id == 'new_order' || $email->id == 'customer_on_hold_order') {
-		$params = [$order->id, $order->payment_method];
-		$params[] = sha1(implode($params) . $order->order_key);
-		$link = add_query_arg('mk-payment-link', implode(',', $params), home_url());
-		if ($order->payment_method == 'tb_tatrapay' || $order->payment_method == 'tb_cardpay') {
+	if ($email->id == 'customer_invoice' || $email->id == 'new_order' || $email->id == 'customer_on_hold_order' || $email->id == 'payment_notification' ) {
+
+        if ( in_array( $order->get_payment_method(), [ 'tb_tatrapay', 'tb_cardpay', 'besteron' ] ) ) {
+            // mk-payment-link works for all payments above
+            // plugin "Payment Link" required
+            $params = [$order->get_id(), $order->get_payment_method()];
+		    $params[] = sha1(implode($params) . $order->get_order_key());
+		    $link = add_query_arg('mk-payment-link', implode(',', $params), home_url());
+
+        } /* elseif ( $order->get_payment_method() == 'besteron' ) {
+            // This is other option for besteron
+            $link = $order->get_checkout_payment_url();
+
+        } */
+
+        
+		if ( ! empty($link) ) {
+            
+            // Print PAY button
 			print_r('
                 <table style="font-family:arial,helvetica,sans-serif;margin-bottom:20px;margin-top:20px" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
                 <tbody>
