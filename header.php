@@ -19,7 +19,6 @@
 		<meta name="facebook-domain-verification" content="c0xpgno74m6goeodmx7gg06gma9xjw" />
 		<meta name="facebook-domain-verification" content="4i9urk7hs1b126kabsrqtls1zmuch5" />
 
-
 		<?php Medizin_THA::instance()->head_top(); ?>
 		<meta charset="<?php echo esc_attr(get_bloginfo('charset', 'display')); ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,11 +28,10 @@
 		<?php endif; ?>
 		<?php Medizin_THA::instance()->head_bottom(); ?>
 		<?php wp_head(); ?>
-		<!-- Google tag (gtag.js) --> <script async
-											  src="https://www.googletagmanager.com/gtag/js?id=AW-625375761"></script> <script>
-			window.dataLayer = window.dataLayer || []; function
-			gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW625375761'); </script>
-		<meta name="google-site-verification" content="XvE3jUiyGiiCdw5onIMOlxWF_CC1wpiX-I-7mo81bAg" />
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJN3JVQLV0"></script> <script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());   gtag('config', 'G-PJN3JVQLV0'); </script>
+
 		<?php do_action('heba_head_tag'); ?>
 	</head>
 
