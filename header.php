@@ -29,7 +29,10 @@
 		<?php Medizin_THA::instance()->head_bottom(); ?>
 		<?php wp_head(); ?>
 
-        <!-- Google tag (gtag.js) -->
+        <!-- Google tag - ADS (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-625375761"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW625375761'); </script>
+
+        <!-- Google tag - GA4 (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJN3JVQLV0"></script> <script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());   gtag('config', 'G-PJN3JVQLV0'); </script>
 
 		<?php do_action('heba_head_tag'); ?>
