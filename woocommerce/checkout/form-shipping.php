@@ -20,20 +20,49 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 <div id="shipping-in-form">
-	<?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
 
-	<?php do_action( 'woocommerce_cart_totals_before_shipping' ); ?>
+    <?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
 
-	<?php wc_cart_totals_shipping_html(); ?>
+        <?php if ( true === WC()->cart->needs_shipping_address() ) : ?>
 
-	<?php do_action( 'woocommerce_cart_totals_after_shipping' ); ?>
+            <h3 id="ship-to-different-address">
+                <label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
+                    <input id="ship-to-different-address-checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" <?php checked( apply_filters( 'woocommerce_ship_to_different_address_checked', 'shipping' === get_option( 'woocommerce_ship_to_destination' ) ? 1 : 0 ), 1 ); ?> type="checkbox" name="ship_to_different_address" value="1" /> <span><?php esc_html_e( 'Ship to a different address?', 'woocommerce' ); ?></span>
+                </label>
+            </h3>
 
-	<?php elseif ( WC()->cart->needs_shipping() && 'yes' === get_option( 'woocommerce_enable_shipping_calc' ) ) : ?>
+            <div class="shipping_address">
 
-	<div id="shipping">
-		<<?php esc_html_e( 'Shipping', 'medizin' ); ?></h3>
-		<?php esc_attr_e( 'Shipping', 'medizin' ); ?>"><?php woocommerce_shipping_calculator(); ?>
-	</div>
+                <?php do_action( 'woocommerce_before_checkout_shipping_form', $checkout ); ?>
 
-	<?php endif; ?>
+                <div class="woocommerce-shipping-fields__field-wrapper">
+                    <?php
+                    $fields = $checkout->get_checkout_fields( 'shipping' );
+
+                    foreach ( $fields as $key => $field ) {
+                        woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
+                    }
+                    ?>
+                </div>
+
+                <?php do_action( 'woocommerce_after_checkout_shipping_form', $checkout ); ?>
+
+            </div>
+
+        <?php endif; ?>
+
+        <?php do_action( 'woocommerce_cart_totals_before_shipping' ); ?>
+
+        <?php wc_cart_totals_shipping_html(); ?>
+
+        <?php do_action( 'woocommerce_cart_totals_after_shipping' ); ?>
+
+    <?php elseif ( WC()->cart->needs_shipping() && 'yes' === get_option( 'woocommerce_enable_shipping_calc' ) ) : ?>
+
+        <div id="shipping">
+            <<?php esc_html_e( 'Shipping', 'medizin' ); ?></h3>
+            <?php esc_attr_e( 'Shipping', 'medizin' ); ?>"><?php woocommerce_shipping_calculator(); ?>
+        </div>
+
+    <?php endif; ?>
 </div>
