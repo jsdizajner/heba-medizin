@@ -42,7 +42,7 @@ function bbloomer_attach_pdf_to_emails($attachments, $email_id, $order, $email)
 	$email_ids = array('customer_completed_order');
 	if (in_array($email_id, $email_ids)) {
 		$upload_dir = wp_upload_dir();
-		$attachments[] = $upload_dir['basedir'] . "/2020/09/odstupenie-od-zmluvy.docx";
+		$attachments[] = $upload_dir['basedir'] . "/legal/odstupenie-od-zmluvy.docx";
 	}
 	return $attachments;
 }
