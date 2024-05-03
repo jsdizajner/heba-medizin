@@ -3,7 +3,7 @@ Theme Name: Heba
 Theme URI: http://heba.sk
 Author: Július Sipos
 Author URI: http://heba.sk
-Version: 1.8.8.009
+Version: 1.8.8.010
 Template: medizin
 Text Domain: medizin
 */
@@ -249,7 +249,7 @@ li.mbo-category {
 }
 
 ul.mbo-categories li.mbo-category:last-child {
-	margin-bottom: 5em;
+	margin-bottom: 15em;
 	border-bottom: solid #EEEEEE 1px;
 }
 
