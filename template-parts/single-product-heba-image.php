@@ -139,7 +139,7 @@ $heba_gallery = $heba_image->get_gallery();
 
                 }
                 ?>
-                <div class="tm-swiper medizin-main-swiper"
+                <div class="tm-swiper medizin-main-swiper" style="overflow: hidden !important;"
                      data-lg-items="1"
                      data-lg-gutter="30"
                      data-speed="1000"
@@ -157,7 +157,7 @@ $heba_gallery = $heba_image->get_gallery();
 
 
                 <?php if ( $number_attachments > 1 ) { ?>
-                    <div class="tm-swiper medizin-thumbs-swiper"
+                    <div class="tm-swiper medizin-thumbs-swiper" style="overflow: hidden !important;"
                          data-lg-items="4"
                          data-lg-gutter="10"
                          data-speed="1000"
