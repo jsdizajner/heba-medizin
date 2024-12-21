@@ -163,3 +163,54 @@ Container::make( 'theme_options', __( 'Homepage Slider' ) )
             ) ),
 
     ) );
+
+add_action('woocommerce_checkout_billing', 'checkout_billing_phone_validation_slovak', 10);
+
+function checkout_billing_phone_validation_slovak()
+{
+    ?>
+    <script>
+        jQuery(document).ready(function ($) {
+            // Function to validate Slovak international phone numbers
+            function isValidSlovakPhone(phone) {
+                const regex = /^\+421\d{9}$/; // Regex for Slovak international format (+421 followed by 9 digits)
+                return regex.test(phone);
+            }
+
+            // Add event listener for the billing phone field
+            const billingPhoneField = $('input[name="billing_phone"]');
+            const nextButton = $('#action-next');
+            let timeout;
+
+            // Initial button state
+            nextButton.prop('disabled', true);
+
+            billingPhoneField.on('input', function () {
+                clearTimeout(timeout);
+
+                timeout = setTimeout(() => {
+                    const phoneValue = $(this).val().trim();
+
+                    // Clear previous errors
+                    $(this).removeClass('woocommerce-invalid').removeClass('woocommerce-validated');
+                    $(this).siblings('.phone-error-message').remove();
+
+                    // Validate phone number
+                    if (isValidSlovakPhone(phoneValue)) {
+                        $(this).addClass('woocommerce-validated');
+                        nextButton.prop('disabled', false); // Enable button
+                    } else {
+                        if (phoneValue !== "") {
+                            $(this).addClass('woocommerce-invalid');
+                            $(this).after('<span class="phone-error-message" style="color: red; font-size: 12px;">Prosím napíšte mobilné číslo vo formáte +421 9XX XXX XXX.</span>');
+                        }
+                        nextButton.prop('disabled', true); // Disable button
+                    }
+                }, 500); // 500ms delay to check after the user stops typing
+            });
+        });
+
+    </script>
+
+    <?
+}
