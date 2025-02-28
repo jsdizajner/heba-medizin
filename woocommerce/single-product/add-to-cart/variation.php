@@ -8,7 +8,8 @@
  *
  * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
- * @version 2.5.0
+ * @todo CHANGE TO DEFAULT DATA VIA FILTER #at Woo v9.7 ENUMS
+ * @version 9.3.0
  */
 
 defined('ABSPATH') || exit;

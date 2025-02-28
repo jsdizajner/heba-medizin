@@ -12,7 +12,8 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
- * @version 3.6.0
+ * @todo CHANGE THUMBNAIL SUPPORT
+ * @version 9.4.0
  */
 
 defined( 'ABSPATH' ) || exit;
