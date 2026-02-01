@@ -34,12 +34,40 @@ defined('ABSPATH') || exit;
 
 	<# } #>
 
+
 	</div>
 
 	<div class="sku_wrapper meta-item">
 		<div class="woocommerce-variation-sku"><span id="sku-check">{{{ data.variation.sku || "-" }}}</span></div>
 		<div class="woocommerce-variation-availability">{{{ data.variation.availability_html }}}</div>
 	</div>
+
+	<# if ( data.variation.heba_medizin_ean ) { #>
+	<!-- Ean -->
+	<div class="ean_wrapper meta-item" style="display:flex; margin-bottom:10px">
+	<br>
+		<label class="meta-label" style="min-width:100px; margin:0 15px 0 0">EAN:</label>
+		<div class="meta-content">
+			<span class="ean">
+				{{{ data.variation.heba_medizin_ean }}}
+			</span>
+		</div>
+	</div>
+	<#  } #>
+
+	<# if ( data.variation.heba_medizin_pcid ) { #>
+	<!-- PCID -->
+	<div class="pcid_wrapper meta-item" style="display:flex; margin-bottom:10px">
+		<br>
+		<label class="meta-label" style="min-width:100px; margin:0 15px 0 0">PCID:</label>
+		<div class="meta-content">
+			<span class="pcid">
+				{{{ data.variation.heba_medizin_pcid }}}
+			</span>
+		</div>
+	</div>
+	<#  } #>
+
 </script>
 <script type="text/template" id="tmpl-unavailable-variation-template">
 	<p><?php esc_html_e('Sorry, this product is unavailable. Please choose a different combination.', 'woocommerce'); ?></p>

@@ -72,6 +72,34 @@ global $product;
 		<?php  } ?>
 	</div>
 
+	<?php if ( $ean = $product->get_meta("_global_unique_id", true) ) { ?>
+	<!-- Ean -->
+	<div class="ean_wrapper meta-item">
+		<br>
+			<label class="meta-label"><?php esc_html_e('EAN:', 'medizin'); ?></label>
+			<div class="meta-content">
+				<span class="ean">
+					<?php echo esc_html($ean); ?>
+				</span>
+			</div>
+		</div>
+	<?php  } ?>
+
+	<?php if ( $pcid = $product->get_meta("_importer_pcid", true) ) { ?>
+	<!-- PCID -->
+	<div class="pcid_wrapper meta-item">
+		<br>
+			<label class="meta-label"><?php esc_html_e('PCID:', 'medizin'); ?></label>
+			<div class="meta-content">
+				<span class="pcid">
+					<?php echo esc_html($pcid); ?>
+				</span>
+			</div>
+		</div>
+	<?php  } ?>
+
+
+	<!-- Product tags -->
 	<?php if (Medizin::setting('single_product_tags_enable') === '1') : ?>
 		<?php echo wc_get_product_tag_list($product->get_id(), ' / ', '<div class="tagged_as meta-item"><label class="meta-label">' . _n('Tag:', 'Tags:', count($product->get_tag_ids()), 'medizin') . '</label><div class="meta-content">', '</div></div>'); ?>
 	<?php endif; ?>

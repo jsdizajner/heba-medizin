@@ -213,5 +213,19 @@ function checkout_billing_phone_validation_slovak()
 
     </script>
 
-    <?
+    <?php
 }
+
+
+/**
+ * @docs https://www.kathyisawesome.com/add-custom-meta-fields-to-woocommerce-variations/
+ */
+function heba_medizin_add_variation_data( $data, $product, $variation ) {
+    $add = [
+        'heba_medizin_ean'   => esc_html( $variation->get_meta("_global_unique_id", true) ),
+        'heba_medizin_pcid'  => esc_html( $variation->get_meta("_importer_pcid", true) ),
+    ];
+
+    return array_merge( $data, $add );
+}
+add_filter( 'woocommerce_available_variation', 'heba_medizin_add_variation_data', 10, 3 );
