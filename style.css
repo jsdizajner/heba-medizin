@@ -3,7 +3,7 @@ Theme Name: Heba
 Theme URI: http://heba.sk
 Author: Július Sipos
 Author URI: http://heba.sk
-Version: 1.9.0
+Version: 1.9.1
 Template: medizin
 Text Domain: medizin
 */
@@ -457,4 +457,13 @@ a.mbo-link {
 		display: -ms-inline-flexbox !important;
 		display: inline-flex !important;
 	}
+}
+/*
+WooCommerce block filters (stock / attribute): Medizin draws its own box via
+input[type="checkbox"]::before (position:absolute; left:50%). WC block checkboxes
+are not positioned, so that box lands in the middle of the label text.
+*/
+.wc-block-components-checkbox .wc-block-components-checkbox__input[type="checkbox"]::before {
+	content: none;
+	display: none;
 }
