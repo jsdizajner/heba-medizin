@@ -14,6 +14,17 @@ require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/inc/mega-menu.php';
 
 /**
+ * Medizin_Woo::enqueue_wc_cart_fragments() calls WC()->cart->is_empty() without a null check.
+ * On requests where WooCommerce has not loaded the cart (seen on 404 pages) that is a fatal error.
+ * Load the cart before the theme's callback runs.
+ */
+add_action( 'wp_enqueue_scripts', function () {
+	if ( function_exists( 'WC' ) && function_exists( 'wc_load_cart' ) && null === WC()->cart && ! is_admin() ) {
+		wc_load_cart();
+	}
+}, 0 );
+
+/**
  * Initiate Update Checker
  */
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
@@ -230,7 +241,7 @@ function checkout_billing_phone_validation_slovak()
  */
 function heba_medizin_add_variation_data( $data, $product, $variation ) {
     $add = [
-        'heba_medizin_ean'   => esc_html( $variation->get_meta("_global_unique_id", true) ),
+        'heba_medizin_ean'   => esc_html( $variation->get_global_unique_id() ),
         'heba_medizin_pcid'  => esc_html( $variation->get_meta("_importer_pcid", true) ),
     ];
 

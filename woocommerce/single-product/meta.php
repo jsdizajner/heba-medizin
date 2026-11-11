@@ -72,7 +72,7 @@ global $product;
 		<?php  } ?>
 	</div>
 
-	<?php if ( $ean = $product->get_meta("_global_unique_id", true) ) { ?>
+	<?php if ( $ean = $product->get_global_unique_id() ) { ?>
 	<!-- Ean -->
 	<div class="ean_wrapper meta-item">
 		<br>
