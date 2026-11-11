@@ -9,6 +9,11 @@ $HEBA_THEME_VERSION = \HEBA_CORE\HEBA_CORE::get_theme_info('Version');
 require __DIR__ . '/vendor/autoload.php';
 
 /**
+ * Category mega menu (desktop primary menu)
+ */
+require __DIR__ . '/inc/mega-menu.php';
+
+/**
  * Initiate Update Checker
  */
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;

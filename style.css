@@ -3,7 +3,7 @@ Theme Name: Heba
 Theme URI: http://heba.sk
 Author: Július Sipos
 Author URI: http://heba.sk
-Version: 1.9.1
+Version: 1.10.0
 Template: medizin
 Text Domain: medizin
 */
@@ -466,4 +466,106 @@ are not positioned, so that box lands in the middle of the label text.
 .wc-block-components-checkbox .wc-block-components-checkbox__input[type="checkbox"]::before {
 	content: none;
 	display: none;
+}
+
+/*******************************/
+/** CATEGORY MEGA MENU        **/
+/** markup: inc/mega-menu.php **/
+/*******************************/
+#menu.menu--primary {
+	position: relative;
+}
+
+#menu .menu__container > li.heba-mega-item {
+	position: static;
+}
+
+#menu .heba-mega {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 999;
+	visibility: hidden;
+	opacity: 0;
+	transform: translateY(8px);
+	transition: opacity .15s ease, transform .15s ease, visibility 0s linear .15s;
+	text-align: left;
+}
+
+/* Small delay on open so the panel does not flash while moving across the bar. */
+#menu .heba-mega-item:hover > .heba-mega,
+#menu .heba-mega-item:focus-within > .heba-mega {
+	visibility: visible;
+	opacity: 1;
+	transform: none;
+	transition-delay: .12s, .12s, .12s;
+}
+
+#menu .heba-mega__inner {
+	background: #fff;
+	border-radius: 0 0 8px 8px;
+	box-shadow: 0 16px 40px rgba(0, 0, 0, .12);
+	padding: 28px 32px 20px;
+	max-height: calc(100vh - 220px);
+	overflow-y: auto;
+}
+
+#menu .heba-mega__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+	gap: 24px 32px;
+}
+
+#menu .heba-mega a {
+	display: inline;
+	padding: 0 !important;
+	font-size: 14px !important;
+	line-height: 1.4;
+	color: #555;
+	white-space: normal;
+}
+
+#menu .heba-mega a:hover {
+	color: #000;
+	text-decoration: underline;
+}
+
+#menu .heba-mega a.heba-mega__heading {
+	display: block;
+	margin-bottom: 8px;
+	font-weight: 700;
+	color: #111;
+}
+
+/* SmartMenus hides every nested ul in .sm, reset it for our lists. */
+#menu .heba-mega__list {
+	display: block !important;
+	position: static !important;
+	width: auto !important;
+	min-width: 0 !important;
+	list-style: none;
+	margin: 0 !important;
+	padding: 0 !important;
+	background: none;
+	box-shadow: none;
+}
+
+#menu .heba-mega__list li {
+	margin: 0 0 6px;
+	padding: 0;
+}
+
+#menu .heba-mega__more a {
+	font-weight: 600;
+	color: #111;
+}
+
+#menu .heba-mega a.heba-mega__all {
+	display: block;
+	margin-top: 20px;
+	padding-top: 14px !important;
+	border-top: 1px solid #eee;
+	font-weight: 700;
+	color: #111;
 }
