@@ -31,8 +31,11 @@ $myUpdateChecker->setBranch('main');
  * Enqueue child scripts
  */
 if ( ! function_exists( 'heba_enqueue_scripts' ) ) {
-	function heba_enqueue_scripts($HEBA_THEME_VERSION) {
-		wp_enqueue_style( 'heba-style', get_stylesheet_directory_uri() . '/style.css', '[]', $HEBA_THEME_VERSION);
+	function heba_enqueue_scripts() {
+		// wp_enqueue_scripts passes no arguments, so the version must be resolved here.
+		// filemtime changes on every deploy, so browsers never keep a stale style.css.
+		$version = filemtime( get_stylesheet_directory() . '/style.css' );
+		wp_enqueue_style( 'heba-style', get_stylesheet_directory_uri() . '/style.css', array(), $version );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'heba_enqueue_scripts', 15 );
