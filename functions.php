@@ -19,6 +19,16 @@ require __DIR__ . '/inc/mega-menu.php';
 require __DIR__ . '/inc/checkout-shipping.php';
 
 /**
+ * Checkout: phone validation without a dead "Ďalej" button, order total above the order button
+ */
+require __DIR__ . '/inc/checkout-ux.php';
+
+/**
+ * Slovak fallbacks for untranslated WooCommerce / FiboSearch strings
+ */
+require __DIR__ . '/inc/translations.php';
+
+/**
  * Medizin_Woo::enqueue_wc_cart_fragments() calls WC()->cart->is_empty() without a null check.
  * On requests where WooCommerce has not loaded the cart (seen on 404 pages) that is a fatal error.
  * Load the cart before the theme's callback runs.
@@ -175,57 +185,7 @@ Container::make( 'theme_options', __( 'Homepage Slider' ) )
 
     ) );
 
-add_action('woocommerce_checkout_billing', 'checkout_billing_phone_validation_slovak', 10);
-
-function checkout_billing_phone_validation_slovak()
-{
-    ?>
-    <script>
-        jQuery(document).ready(function ($) {
-            // Function to validate Slovak national phone numbers
-            function isValidSlovakPhone(phone) {
-                const regex = /^09\d{8}$/; // Regex for Slovak national format (09X XXX XXXX)
-                return regex.test(phone);
-            }
-
-            // Add event listener for the billing phone field
-            const billingPhoneField = $('input[name="billing_phone"]');
-            const nextButton = $('#action-next');
-            let timeout;
-
-            // Initial button state
-            nextButton.prop('disabled', true);
-
-            billingPhoneField.on('input', function () {
-                clearTimeout(timeout);
-
-                timeout = setTimeout(() => {
-                    const phoneValue = $(this).val().trim();
-
-                    // Clear previous errors
-                    $(this).removeClass('woocommerce-invalid').removeClass('woocommerce-validated');
-                    $(this).siblings('.phone-error-message').remove();
-
-                    // Validate phone number
-                    if (isValidSlovakPhone(phoneValue)) {
-                        $(this).addClass('woocommerce-validated');
-                        nextButton.prop('disabled', false); // Enable button
-                    } else {
-                        if (phoneValue !== "") {
-                            $(this).addClass('woocommerce-invalid');
-                            $(this).after('<span class="phone-error-message" style="color: red; font-size: 12px;">Prosím napíšte mobilné číslo vo formáte 09XX XXX XXX.</span>');
-                        }
-                        nextButton.prop('disabled', true); // Disable button
-                    }
-                }, 500); // 500ms delay to check after the user stops typing
-            });
-        });
-
-
-    </script>
-
-    <?php
-}
+// Phone validation moved to inc/checkout-ux.php (the old one kept "Ďalej" disabled for pre-filled numbers).
 
 
 /**

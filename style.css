@@ -3,7 +3,7 @@ Theme Name: Heba
 Theme URI: http://heba.sk
 Author: Július Sipos
 Author URI: http://heba.sk
-Version: 1.10.4
+Version: 1.10.5
 Template: medizin
 Text Domain: medizin
 */
@@ -607,4 +607,81 @@ are not positioned, so that box lands in the middle of the label text.
 	border-top: 1px solid #eee;
 	font-weight: 700;
 	color: #111;
+}
+
+/*******************************************/
+/** UX audit 2026-11-24 (1.10.5)          **/
+/*******************************************/
+
+/* Screen-reader-only text was visible (e.g. "<product> quantity" above the quantity field). */
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	word-wrap: normal !important;
+}
+.screen-reader-text:focus {
+	clip: auto !important;
+	clip-path: none;
+	height: auto;
+	width: auto;
+	z-index: 100000;
+}
+
+/* Filled form values had the same light grey as placeholders (#ababab, 2.3:1), so pre-filled
+   checkout fields looked empty. Values dark, placeholders lighter. */
+.woocommerce form .form-row input.input-text,
+.woocommerce form .form-row textarea,
+.woocommerce form .form-row select,
+.woocommerce-checkout input.input-text,
+.woocommerce-checkout textarea,
+.woocommerce-checkout select {
+	color: #1f2933 !important;
+}
+.woocommerce form .form-row input.input-text::placeholder,
+.woocommerce form .form-row textarea::placeholder,
+.woocommerce-checkout input.input-text::placeholder,
+.woocommerce-checkout textarea::placeholder {
+	color: #8a8f98 !important;
+	opacity: 1;
+}
+
+/* Phone error message (inc/checkout-ux.php). */
+.phone-error-message {
+	display: block;
+	margin-top: 6px;
+	color: #c62828;
+	font-size: 13px;
+}
+.woocommerce form .form-row.woocommerce-invalid-phone input.input-text {
+	border-color: #c62828 !important;
+}
+
+/* Order total right above the order button. */
+.heba-order-total {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 0 0 16px;
+	padding: 14px 16px;
+	border-radius: 8px;
+	background: #eef6fb;
+	font-size: 16px;
+}
+.heba-order-total__label {
+	font-weight: 600;
+	color: #1f2933;
+}
+.heba-order-total__value strong,
+.heba-order-total__value .amount {
+	font-size: 20px;
+	font-weight: 700;
 }
