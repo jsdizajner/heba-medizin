@@ -51,20 +51,7 @@ if ( ! function_exists( 'heba_enqueue_scripts' ) ) {
 }
 add_action( 'wp_enqueue_scripts', 'heba_enqueue_scripts', 15 );
 
-/**
- * @snippet       File Attachment @ WooCommerce Emails
- */
-
-add_filter('woocommerce_email_attachments', 'bbloomer_attach_pdf_to_emails', 10, 4);
-function bbloomer_attach_pdf_to_emails($attachments, $email_id, $order, $email)
-{
-	$email_ids = array('customer_completed_order');
-	if (in_array($email_id, $email_ids)) {
-		$upload_dir = wp_upload_dir();
-		$attachments[] = $upload_dir['basedir'] . "/legal/odstupenie-od-zmluvy.docx";
-	}
-	return $attachments;
-}
+// Withdrawal form attachment for the "Completed order" e-mail lives in heba-core (1.6.7.026+).
 
 
 /**
