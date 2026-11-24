@@ -50,25 +50,25 @@
                         <path id="CategoriesIcon" class="CategoriesIcon " d="M3.5 4.66675H24.5V7.00008H3.5V4.66675ZM3.5 12.8334H17.5V15.1667H3.5V12.8334ZM3.5 21.0001H24.5V23.3334H3.5V21.0001Z" fill="#3886C7"/>
                     </svg>
                 </i>
-                <span><?php echo __('Categories', 'woocommerce'); ?></span>
+                <span><?php echo esc_html__( 'Kategórie', 'medizin' ); ?></span>
             </a>
         </li>
         <li class="mobile-navigation-bottom-nav-item" id="FocusSearchInput">
             <a href="#mobileSearchFocus" class="mbm-link">
-                <i class="mbm-icon"><img src="<?php echo esc_url( get_stylesheet_directory_uri()); ?>/assets/images/mobil-hladat.svg" alt="Icon Categories" /></i>
-                <span><?php echo __('Search', 'woocommerce'); ?></span>
+                <i class="mbm-icon"><img src="<?php echo esc_url( get_stylesheet_directory_uri()); ?>/assets/images/mobil-hladat.svg" alt="" /></i>
+                <span><?php echo esc_html__( 'Hľadanie', 'medizin' ); ?></span>
             </a>
         </li>
         <li class="mobile-navigation-bottom-nav-item">
             <a href="<?php echo wc_get_cart_url(); ?>" class="mbm-link">
-                <i class="mbm-icon"><img src="<?php echo esc_url( get_stylesheet_directory_uri()); ?>/assets/images/mobil-kosik.svg" alt="Icon Categories" /></i>
-                <span><?php echo __('Cart', 'woocommerce'); ?></span>
+                <i class="mbm-icon"><img src="<?php echo esc_url( get_stylesheet_directory_uri()); ?>/assets/images/mobil-kosik.svg" alt="" /></i>
+                <span><?php echo esc_html__( 'Košík', 'medizin' ); ?></span>
             </a>
         </li>
         <li class="mobile-navigation-bottom-nav-item">
             <a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>" class="mbm-link">
-                <i class="mbm-icon"><img src="<?php echo esc_url( get_stylesheet_directory_uri()); ?>/assets/images/mobil-ucet.svg" alt="Icon Categories" /></i>
-                <span><?php echo __('Profile', 'woocommerce'); ?></span>
+                <i class="mbm-icon"><img src="<?php echo esc_url( get_stylesheet_directory_uri()); ?>/assets/images/mobil-ucet.svg" alt="" /></i>
+                <span><?php echo esc_html__( 'Účet', 'medizin' ); ?></span>
             </a>
         </li>
     </ul>
@@ -81,11 +81,35 @@
     <div class="mbo-menu">
         <ul class="mbo-categories">
             <?php
-            $categories = get_terms(['taxonomy' => 'product_cat','hide_empty' => false, 'parent' => 0]);
-            foreach ($categories as $category) {
+            // Same top-level items and order as the desktop primary menu.
+            // Fallback: top-level product categories without "Nezaradené" and empty ones.
+            $heba_mbo_items = array();
+            $heba_locations = get_nav_menu_locations();
+            if ( ! empty( $heba_locations['primary'] ) ) {
+                foreach ( (array) wp_get_nav_menu_items( $heba_locations['primary'] ) as $heba_item ) {
+                    if ( 0 === (int) $heba_item->menu_item_parent ) {
+                        $heba_mbo_items[] = array( 'url' => $heba_item->url, 'title' => $heba_item->title );
+                    }
+                }
+            }
+            if ( empty( $heba_mbo_items ) ) {
+                $categories = get_terms( array(
+                    'taxonomy'   => 'product_cat',
+                    'hide_empty' => true,
+                    'parent'     => 0,
+                    'orderby'    => 'menu_order',
+                    'exclude'    => array( (int) get_option( 'default_product_cat' ) ),
+                ) );
+                if ( ! is_wp_error( $categories ) ) {
+                    foreach ( $categories as $category ) {
+                        $heba_mbo_items[] = array( 'url' => get_term_link( $category ), 'title' => $category->name );
+                    }
+                }
+            }
+            foreach ( $heba_mbo_items as $heba_item ) {
                 echo '<li class="mbo-category">
-            <a href="' . get_term_link($category->term_id) . '" class="mbo-link">'. $category->name .'</a>
-            <i class="mbo-icon"><img src="'. get_stylesheet_directory_uri() .'/assets/images/mbo-chevron.svg" /></i>
+            <a href="' . esc_url( $heba_item['url'] ) . '" class="mbo-link">' . esc_html( $heba_item['title'] ) . '</a>
+            <i class="mbo-icon"><img src="' . esc_url( get_stylesheet_directory_uri() ) . '/assets/images/mbo-chevron.svg" alt="" /></i>
         </li>';
             }
             ?>
