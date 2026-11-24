@@ -3,7 +3,7 @@ Theme Name: Heba
 Theme URI: http://heba.sk
 Author: Július Sipos
 Author URI: http://heba.sk
-Version: 1.11.2
+Version: 1.11.3
 Template: medizin
 Text Domain: medizin
 */
@@ -742,7 +742,7 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 summary:focus-visible,
-[tabindex]:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible,
 .select2-selection:focus-visible {
 	outline: 3px solid #1a5a8f !important;
 	outline-offset: 2px !important;
@@ -855,6 +855,15 @@ body.woocommerce-page input.button:hover,
 #action-prev:hover {
 	background-color: #235b8a !important;
 	border-color: #235b8a !important;
+}
+
+/* Buttons inside notices ("Pokračovať v nakupovaní"): no fill on the blue bar, fill only on hover. */
+.woocommerce-notices-wrapper .button:not(:hover),
+.woocommerce-message .button:not(:hover),
+.woocommerce-info .button:not(:hover),
+.woocommerce-error .button:not(:hover) {
+	background-color: transparent !important;
+	border-color: transparent !important;
 }
 
 /* Mobile category overlay close button (was an <i>, now a <button>). */
