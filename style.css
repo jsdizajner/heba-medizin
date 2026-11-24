@@ -3,7 +3,7 @@ Theme Name: Heba
 Theme URI: http://heba.sk
 Author: Július Sipos
 Author URI: http://heba.sk
-Version: 1.10.3
+Version: 1.10.4
 Template: medizin
 Text Domain: medizin
 */
@@ -95,6 +95,45 @@ ul.subcategories-list li a:hover{
 	color: #4E97FD;
 	position: absolute;
 	right: 20px;
+}
+
+/* Whole card selects the method (click handler in inc/checkout-shipping.php); the label fills the card. */
+#shipping-in-form ul#shipping_method li label {
+	flex: 1;
+	align-self: stretch;
+	display: flex;
+	align-items: center;
+	margin: 0;
+	cursor: pointer;
+}
+
+/* Last step: chosen shipping as a read-only card, no radios. */
+.woocommerce-checkout-review-order-table tr.heba-shipping-summary td {
+	text-align: left;
+}
+
+.woocommerce-checkout-review-order-table .heba-shipping-card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	min-height: 60px;
+	padding: 0 20px 0 15px;
+	background: #ffffff;
+	border: 1px solid #e0e0e0;
+	border-radius: 5px;
+	color: #816969;
+	font-weight: 500;
+}
+
+.woocommerce-checkout-review-order-table .heba-shipping-card .woocommerce-Price-amount.amount {
+	margin-left: auto;
+	color: #4E97FD;
+	white-space: nowrap;
+}
+
+.woocommerce-checkout-review-order-table .heba-shipping-card--empty {
+	color: #b0413e;
 }
 
 .elementor-page.page-has-no-sidebar .page-content > .container {
