@@ -29,6 +29,11 @@ require __DIR__ . '/inc/checkout-ux.php';
 require __DIR__ . '/inc/translations.php';
 
 /**
+ * Accessibility: skip link, product image alt fallback, names for icon-only controls
+ */
+require __DIR__ . '/inc/accessibility.php';
+
+/**
  * Medizin_Woo::enqueue_wc_cart_fragments() calls WC()->cart->is_empty() without a null check.
  * On requests where WooCommerce has not loaded the cart (seen on 404 pages) that is a fatal error.
  * Load the cart before the theme's callback runs.

@@ -3,7 +3,7 @@ Theme Name: Heba
 Theme URI: http://heba.sk
 Author: Július Sipos
 Author URI: http://heba.sk
-Version: 1.10.6
+Version: 1.11.0
 Template: medizin
 Text Domain: medizin
 */
@@ -706,4 +706,175 @@ are not positioned, so that box lands in the middle of the label text.
 .woocommerce-checkout #order_note_field,
 .woocommerce-checkout .form-row-wide:not(.form-row-first):not(.form-row-last) {
 	clear: both;
+}
+
+/*******************************************/
+/** Accessibility, WCAG 2.1 AA (1.11.0)   **/
+/*******************************************/
+/*
+ * Contrast targets: 4.5:1 for normal text, 3:1 for large text and UI.
+ * #2b6fa8 = darker shade of the brand blue (#378fcf / #3886c7), 5.3:1 on white,
+ *           white text on it 5.3:1. Used for the menu bar, buttons and prices.
+ * #c0392b = sale red, 5.4:1.  #4a4a4a = body text, 8.9:1.  #6b6b6b = secondary text, 5.3:1.
+ */
+
+/* Skip link: hidden until focused with the keyboard. */
+.heba-skip-link {
+	position: absolute;
+	left: 8px;
+	top: -100px;
+	z-index: 100001;
+	padding: 12px 16px;
+	background: #fff;
+	color: #1f2933;
+	font-weight: 600;
+	border-radius: 6px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+}
+.heba-skip-link:focus {
+	top: 8px;
+}
+
+/* Visible keyboard focus everywhere (the parent theme removes outlines). */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible,
+.select2-selection:focus-visible {
+	outline: 3px solid #1a5a8f !important;
+	outline-offset: 2px !important;
+	box-shadow: 0 0 0 5px #fff !important;
+}
+.page-header-bottom a:focus-visible,
+.heba-order-total a:focus-visible {
+	outline-color: #fff !important;
+	box-shadow: 0 0 0 5px #1a5a8f !important;
+}
+
+/* Body and secondary text: the parent theme uses #9b9b9b / #ababab (2.3–2.8:1). */
+body {
+	color: #4a4a4a;
+}
+.woocommerce-Tabs-panel,
+.woocommerce-Tabs-panel p,
+.woocommerce-product-details__short-description,
+.woocommerce-variation-description,
+.term-description,
+.term-description p,
+.entry-product p,
+.single-product .summary p {
+	color: #4a4a4a !important;
+}
+.top-bar-info .info-text,
+.top-bar-info .info-link,
+.top-bar-info .info-link i,
+.loop-product__category,
+.loop-product__category a,
+.product_meta,
+.product_meta a,
+.woocommerce-result-count,
+.woocommerce-breadcrumb,
+.woocommerce-breadcrumb a,
+.page-breadcrumb,
+.page-breadcrumb a,
+.page-footer .text,
+.page-footer .text-wrap .text,
+.page-footer .heading-primary-wrap,
+.page-footer .copyright,
+.woocommerce form .form-row label,
+.woocommerce-checkout .form-row label {
+	color: #6b6b6b !important;
+}
+
+/* Main menu bar: white text on the brand blue was 3.5:1, with 70 % opacity about 2.5:1. */
+.page-header-bottom {
+	background-color: #2b6fa8 !important;
+}
+.page-header-bottom .menu--primary > ul > li > a,
+.page-header-bottom .menu--primary .menu__container > li > a,
+.page-header-bottom .menu--primary .menu-item-title,
+.page-header-bottom .menu--primary a .menu-item-wrap {
+	color: #fff !important;
+	opacity: 1 !important;
+}
+
+/* Prices. */
+.price,
+.price .amount,
+.woocommerce-Price-amount,
+.shop_table .amount,
+.cart_totals .amount,
+.woocommerce-checkout-review-order .amount {
+	color: #2b6fa8 !important;
+}
+.price ins,
+.price ins .amount {
+	color: #c0392b !important;
+}
+.price del,
+.price del .amount {
+	color: #6b6b6b !important;
+	opacity: 1 !important;
+}
+.product-badges .onsale {
+	background-color: #c0392b !important;
+	color: #fff !important;
+}
+
+/* Buttons: white on #3886c7 was 3.9:1. */
+body.woocommerce-page a.button,
+body.woocommerce-page button.button,
+body.woocommerce-page input.button,
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button,
+.woocommerce .single_add_to_cart_button,
+.woocommerce #place_order,
+.wc-proceed-to-checkout .checkout-button,
+#action-next,
+#action-prev,
+.product-action.button,
+.product-action .button {
+	background-color: #2b6fa8 !important;
+	border-color: #2b6fa8 !important;
+	color: #fff !important;
+}
+body.woocommerce-page a.button:hover,
+body.woocommerce-page button.button:hover,
+body.woocommerce-page input.button:hover,
+.woocommerce a.button:hover,
+.woocommerce button.button:hover,
+.woocommerce input.button:hover,
+.woocommerce .single_add_to_cart_button:hover,
+.woocommerce #place_order:hover,
+.wc-proceed-to-checkout .checkout-button:hover,
+#action-next:hover,
+#action-prev:hover {
+	background-color: #235b8a !important;
+	border-color: #235b8a !important;
+}
+
+/* Mobile category overlay close button (was an <i>, now a <button>). */
+.mobile-menu-overlay .mbo-close {
+	background: none;
+	border: 0;
+	padding: 8px;
+	margin: -8px;
+	cursor: pointer;
+	line-height: 0;
+}
+
+/* Respect "reduce motion". */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: .01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: .01ms !important;
+		scroll-behavior: auto !important;
+	}
 }

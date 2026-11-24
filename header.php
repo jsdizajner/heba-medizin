@@ -41,12 +41,12 @@
 <body <?php body_class(); ?> <?php Medizin::body_attributes(); ?>>
 
 <?php wp_body_open(); ?>
-<nav class="mobile-navigation-bottom">
+<nav class="mobile-navigation-bottom" aria-label="<?php echo esc_attr__( 'Mobilná navigácia', 'medizin' ); ?>">
     <ul class="mobile-navigation-bottom-nav-items">
         <li class="mobile-navigation-bottom-nav-item" id="MobileMenuToggler">
-            <a href="#" class="mbm-link">
+            <a href="#MobileMenuOverlay" class="mbm-link" role="button" aria-controls="MobileMenuOverlay" aria-expanded="false">
                 <i class="mbm-icon">
-                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
                         <path id="CategoriesIcon" class="CategoriesIcon " d="M3.5 4.66675H24.5V7.00008H3.5V4.66675ZM3.5 12.8334H17.5V15.1667H3.5V12.8334ZM3.5 21.0001H24.5V23.3334H3.5V21.0001Z" fill="#3886C7"/>
                     </svg>
                 </i>
@@ -73,10 +73,10 @@
         </li>
     </ul>
 </nav>
-<div class="mobile-menu-overlay" id="MobileMenuOverlay">
+<div class="mobile-menu-overlay" id="MobileMenuOverlay" role="dialog" aria-modal="true" aria-label="<?php echo esc_attr__( 'Kategórie', 'medizin' ); ?>">
     <div class="mbo-top">
-        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/mbo-logo.svg" class="mobile-menu-overlay-logo"/>
-        <i class="mbo-icon" id="MBOCloseIcon"><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/mobil-krizik-cierny.svg" /></i>
+        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/mbo-logo.svg" class="mobile-menu-overlay-logo" alt="Heba"/>
+        <button type="button" class="mbo-icon mbo-close" id="MBOCloseIcon" aria-label="<?php echo esc_attr__( 'Zavrieť kategórie', 'medizin' ); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/mobil-krizik-cierny.svg" alt="" /></button>
     </div>
     <div class="mbo-menu">
         <ul class="mbo-categories">
@@ -124,13 +124,33 @@
     var overlay = document.getElementById('MobileMenuOverlay');
     var MBOCloseIcons = document.getElementById('MBOCloseIcon');
     var MBMToggle = document.getElementById('CategoriesIcon');
+    var burgerLink = burgerMenu.querySelector('a');
+    function hebaSetMenu(open) {
+        burgerLink.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) {
+            var first = overlay.querySelector('.mbo-link');
+            if (first) { first.focus(); }
+        } else {
+            burgerLink.focus();
+        }
+    }
     MBOCloseIcons.addEventListener('click', function () {
         overlay.classList.toggle("overlay");
+        burgerMenu.classList.remove("close");
+        MBMToggle.classList.remove("CategoriesClose");
+        hebaSetMenu(overlay.classList.contains("overlay"));
     });
-    burgerMenu.addEventListener('click',function(){
+    burgerMenu.addEventListener('click',function(e){
+        e.preventDefault();
         this.classList.toggle("close");
         MBMToggle.classList.toggle("CategoriesClose");
         overlay.classList.toggle("overlay");
+        hebaSetMenu(overlay.classList.contains("overlay"));
+    });
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains("overlay")) {
+            MBOCloseIcons.click();
+        }
     });
 </script>
 
