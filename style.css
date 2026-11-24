@@ -3,7 +3,7 @@ Theme Name: Heba
 Theme URI: http://heba.sk
 Author: Július Sipos
 Author URI: http://heba.sk
-Version: 1.11.0
+Version: 1.11.4
 Template: medizin
 Text Domain: medizin
 */
@@ -742,7 +742,7 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 summary:focus-visible,
-[tabindex]:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible,
 .select2-selection:focus-visible {
 	outline: 3px solid #1a5a8f !important;
 	outline-offset: 2px !important;
@@ -855,6 +855,32 @@ body.woocommerce-page input.button:hover,
 #action-prev:hover {
 	background-color: #235b8a !important;
 	border-color: #235b8a !important;
+}
+
+/* Buttons inside notices ("Pokračovať v nakupovaní"): no fill on the blue bar, fill only on hover. */
+.woocommerce-notices-wrapper .button:not(:hover),
+.woocommerce-message .button:not(:hover),
+.woocommerce-info .button:not(:hover),
+.woocommerce-error .button:not(:hover) {
+	background-color: transparent !important;
+	border-color: transparent !important;
+}
+
+/* Checkout payment methods: description #9b9b9b on the selected light blue was ~2:1. */
+#payment .wc_payment_method .payment_title label {
+	color: #1f2933 !important;
+}
+#payment .payment_box,
+#payment .payment_box p {
+	color: #4a4a4a !important;
+}
+.woocommerce-privacy-policy-text,
+.woocommerce-privacy-policy-text p {
+	color: #6b6b6b !important;
+}
+.woocommerce-privacy-policy-text a {
+	color: #2b6fa8 !important;
+	text-decoration: underline;
 }
 
 /* Mobile category overlay close button (was an <i>, now a <button>). */

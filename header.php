@@ -128,8 +128,11 @@
     function hebaSetMenu(open) {
         burgerLink.setAttribute('aria-expanded', open ? 'true' : 'false');
         if (open) {
-            var first = overlay.querySelector('.mbo-link');
-            if (first) { first.focus(); }
+            // The overlay fades in (visibility transition), so focus once it is visible.
+            setTimeout(function () {
+                var first = overlay.querySelector('.mbo-link');
+                if (first && overlay.classList.contains("overlay")) { first.focus(); }
+            }, 350);
         } else {
             burgerLink.focus();
         }

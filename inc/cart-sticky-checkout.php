@@ -41,12 +41,14 @@ add_action( 'wp_footer', function () {
 				background: #fff;
 				border-top: 1px solid #e3e8ee;
 				box-shadow: 0 -6px 16px rgba(21, 51, 72, .08);
-				transition: transform .2s ease, opacity .2s ease;
+				transition: transform .2s ease, opacity .2s ease, visibility 0s linear 0s;
 			}
 			.heba-sticky-checkout.is-away {
 				transform: translateY(110%);
 				opacity: 0;
 				pointer-events: none;
+				visibility: hidden;
+				transition: transform .2s ease, opacity .2s ease, visibility 0s linear .2s;
 			}
 			.heba-sticky-checkout__total {
 				display: flex;
