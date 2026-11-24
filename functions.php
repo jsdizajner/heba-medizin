@@ -14,6 +14,11 @@ require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/inc/mega-menu.php';
 
 /**
+ * Checkout: read-only shipping card in order review, clickable shipping cards
+ */
+require __DIR__ . '/inc/checkout-shipping.php';
+
+/**
  * Medizin_Woo::enqueue_wc_cart_fragments() calls WC()->cart->is_empty() without a null check.
  * On requests where WooCommerce has not loaded the cart (seen on 404 pages) that is a fatal error.
  * Load the cart before the theme's callback runs.
