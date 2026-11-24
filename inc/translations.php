@@ -1,46 +1,68 @@
 <?php
 /**
  * Slovak fallbacks for strings that show up in English on the site
- * (WooCommerce result count, FiboSearch "in" in suggestions).
+ * (result count on shop / category / search pages, FiboSearch "in" in suggestions).
  *
  * Applied only while the string is still untranslated, so an updated language pack wins.
+ * The result count is matched by its English text in any text domain: on this site it stays
+ * English although it is printed by the standard WooCommerce template, so the domain is not
+ * a reliable key.
  */
 
 defined( 'ABSPATH' ) || exit;
 
-add_filter( 'gettext', 'heba_sk_fallback_gettext', 20, 3 );
-add_filter( 'gettext_with_context', function ( $translation, $text, $context, $domain ) {
-	return heba_sk_fallback_gettext( $translation, $text, $domain );
-}, 20, 4 );
-
-function heba_sk_fallback_gettext( $translation, $text, $domain ) {
-	if ( $translation !== $text ) {
-		return $translation;
+/**
+ * Slovak text for an untranslated English source string, or null.
+ */
+function heba_sk_fallback_for( $text, $domain ) {
+	static $map = null;
+	if ( null === $map ) {
+		$map = array(
+			'Showing the single result'                   => 'Zobrazený 1 produkt',
+			'Showing all %d result'                       => 'Počet produktov: %d',
+			'Showing all %d results'                      => 'Počet produktov: %d',
+			'Showing %1$d&ndash;%2$d of %3$d result'      => 'Zobrazené %1$d&ndash;%2$d z %3$d produktov',
+			'Showing %1$d&ndash;%2$d of %3$d results'     => 'Zobrazené %1$d&ndash;%2$d z %3$d produktov',
+			"Showing %1\$d\u{2013}%2\$d of %3\$d results" => "Zobrazené %1\$d\u{2013}%2\$d z %3\$d produktov",
+		);
 	}
-	if ( 'woocommerce' === $domain && 'Showing the single result' === $text ) {
-		return 'Zobrazený 1 produkt';
+	if ( isset( $map[ $text ] ) ) {
+		return $map[ $text ];
 	}
 	if ( 'ajax-search-for-woocommerce' === $domain && 'in' === $text ) {
 		return 'v';
 	}
-	return $translation;
+	return null;
 }
 
-add_filter( 'ngettext', 'heba_sk_fallback_ngettext', 20, 5 );
-add_filter( 'ngettext_with_context', function ( $translation, $single, $plural, $number, $context, $domain ) {
-	return heba_sk_fallback_ngettext( $translation, $single, $plural, $number, $domain );
-}, 20, 6 );
-
-function heba_sk_fallback_ngettext( $translation, $single, $plural, $number, $domain ) {
-	if ( 'woocommerce' !== $domain || ( $translation !== $single && $translation !== $plural ) ) {
+add_filter( 'gettext', function ( $translation, $text, $domain ) {
+	if ( $translation !== $text ) {
 		return $translation;
 	}
-	// Wording avoids Slovak plural forms: "Počet produktov: 32", "1–20 z 32 produktov".
-	if ( 0 === strpos( $single, 'Showing all %d result' ) ) {
-		return 'Počet produktov: %d';
+	$sk = heba_sk_fallback_for( $text, $domain );
+	return null === $sk ? $translation : $sk;
+}, 20, 3 );
+
+add_filter( 'gettext_with_context', function ( $translation, $text, $context, $domain ) {
+	if ( $translation !== $text ) {
+		return $translation;
 	}
-	if ( 0 === strpos( $single, 'Showing %1$d&ndash;%2$d of %3$d result' ) ) {
-		return 'Zobrazené %1$d&ndash;%2$d z %3$d produktov';
+	$sk = heba_sk_fallback_for( $text, $domain );
+	return null === $sk ? $translation : $sk;
+}, 20, 4 );
+
+function heba_sk_fallback_plural( $translation, $single, $plural, $domain ) {
+	if ( $translation !== $single && $translation !== $plural ) {
+		return $translation;
 	}
-	return $translation;
+	$sk = heba_sk_fallback_for( $translation, $domain );
+	return null === $sk ? $translation : $sk;
 }
+
+add_filter( 'ngettext', function ( $translation, $single, $plural, $number, $domain ) {
+	return heba_sk_fallback_plural( $translation, $single, $plural, $domain );
+}, 20, 5 );
+
+add_filter( 'ngettext_with_context', function ( $translation, $single, $plural, $number, $context, $domain ) {
+	return heba_sk_fallback_plural( $translation, $single, $plural, $domain );
+}, 20, 6 );

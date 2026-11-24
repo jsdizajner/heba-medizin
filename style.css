@@ -3,7 +3,7 @@ Theme Name: Heba
 Theme URI: http://heba.sk
 Author: Július Sipos
 Author URI: http://heba.sk
-Version: 1.10.5
+Version: 1.10.6
 Template: medizin
 Text Domain: medizin
 */
@@ -684,4 +684,26 @@ are not positioned, so that box lands in the middle of the label text.
 .heba-order-total__value .amount {
 	font-size: 20px;
 	font-weight: 700;
+}
+
+/* 1.10.6: the parent theme shows the quantity label with a more specific !important rule. */
+.single-product form.cart .quantity-button-wrapper:not(.quantity-input-hidden) label.screen-reader-text,
+.single-product form.cart .quantity-button-wrapper label.screen-reader-text {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	margin: -1px !important;
+	padding: 0 !important;
+	overflow: hidden !important;
+	clip: rect(1px, 1px, 1px, 1px) !important;
+	clip-path: inset(50%) !important;
+	border: 0 !important;
+	white-space: nowrap !important;
+}
+
+/* 1.10.6: the phone error message made the phone row taller and the note field floated
+   next to it. Full-width rows start on a new line. */
+.woocommerce-checkout #order_note_field,
+.woocommerce-checkout .form-row-wide:not(.form-row-first):not(.form-row-last) {
+	clear: both;
 }
