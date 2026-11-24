@@ -200,3 +200,7 @@ function heba_medizin_add_variation_data( $data, $product, $variation ) {
     return array_merge( $data, $add );
 }
 add_filter( 'woocommerce_available_variation', 'heba_medizin_add_variation_data', 10, 3 );
+/**
+ * Cart (mobile): "Prejsť do pokladne" bar above the bottom navigation
+ */
+require __DIR__ . '/inc/cart-sticky-checkout.php';
