@@ -3,7 +3,7 @@ Theme Name: Heba
 Theme URI: http://heba.sk
 Author: Július Sipos
 Author URI: http://heba.sk
-Version: 1.11.4
+Version: 1.11.5
 Template: medizin
 Text Domain: medizin
 */
@@ -780,14 +780,13 @@ body {
 .woocommerce-breadcrumb a,
 .page-breadcrumb,
 .page-breadcrumb a,
-.page-footer .text,
-.page-footer .text-wrap .text,
-.page-footer .heading-primary-wrap,
-.page-footer .copyright,
 .woocommerce form .form-row label,
 .woocommerce-checkout .form-row label {
 	color: #6b6b6b !important;
 }
+
+/* Footer colours are left to Elementor (Footer - Main), so its hover effects work.
+ * Keep footer text at #6b6b6b or darker and link hover at #2b6fa8 or darker there. */
 
 /* Main menu bar: white text on the brand blue was 3.5:1, with 70 % opacity about 2.5:1. */
 .page-header-bottom {
